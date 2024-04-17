@@ -210,8 +210,8 @@ const interpolateColor = (color1: string, color2: string, factor: number) => {
 const updatePoints = () => {
   // set constants
   const gravity = 0;
-  const intensity = 25;
-  const mouseIntensity = 30;
+  const intensity = 35;
+  const mouseIntensity = 40;
   const bounceCoefficient = 0.3;
   const wallFriction = 0.95;
   const dragCoefficient = 0.9999;
