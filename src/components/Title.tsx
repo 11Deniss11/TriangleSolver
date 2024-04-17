@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
   width?: string;
   topPosition?: string;
-  leftPosition?: string;
+  centerPosition?: string;
   padding?: string;
 }
 // title component
@@ -13,7 +13,7 @@ const Title = ({
   children,
   width = "20%",
   topPosition = "50%",
-  leftPosition = "50%",
+  centerPosition = "50%",
   padding = "10px",
 }: Props) => {
   return (
@@ -25,7 +25,7 @@ const Title = ({
         width: width,
         position: "absolute",
         top: topPosition,
-        left: leftPosition,
+        left: `calc(${centerPosition} - ${width} / 2)`,
       }}
     >
       <div

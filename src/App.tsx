@@ -28,7 +28,12 @@ function App() {
       {/* place moving background */}
       <MovingBackground />
       {/* place title component */}
-      <Title width="25%" padding="1px" leftPosition="37.5%" topPosition="0.5%">
+      <Title
+        width="400px"
+        padding="1px"
+        centerPosition="50%"
+        topPosition="0.5%"
+      >
         <h2>Triangle Calculator</h2>
       </Title>
       <div

@@ -35,6 +35,7 @@ const InfoBox = ({
         left: leftPosition,
         bottom: bottomPosition,
         right: rightPosition,
+        zIndex: -1,
       }}
     >
       <div
