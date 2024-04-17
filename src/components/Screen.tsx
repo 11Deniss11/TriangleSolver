@@ -265,8 +265,8 @@ const Screen = ({
         </SmallButton>
         {/* Cycle Ambigious solution button, with additional logic for small window sizes */}
         <SmallButton
-          topPosition={size > 600 ? "-10px" : "-40px"}
-          leftPosition={size > 600 ? `${size / 2 + 150}px` : `${size / 2}px`}
+          topPosition={size > 510 ? "-10px" : "-40px"}
+          leftPosition={size > 510 ? `${size / 2 + 150}px` : `${size / 2}px`}
           hidden={!triangle.ambiguous}
           padding="1px"
           width="133px"
@@ -276,9 +276,9 @@ const Screen = ({
         </SmallButton>
         {/* Show/Hide input boxes button, with additional logic for small window sizes */}
         <SmallButton
-          topPosition={size > 500 ? "-10px" : "-40px"}
+          topPosition={size > 510 ? "-10px" : "-40px"}
           leftPosition={
-            size > 500 ? `${size / 2 - 290}px` : `${size / 2 - 140}px`
+            size > 510 ? `${size / 2 - 290}px` : `${size / 2 - 140}px`
           }
           hidden={!showHideInputButton}
           padding="1px"
