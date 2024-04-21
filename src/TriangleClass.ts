@@ -8,6 +8,20 @@ export type Coordinate = {
 // tolerance for floating point errors
 const epsilon = 0.00001;
 
+// Create Sine and Cosine Law Functions
+const sineLaw = (na: number = 0, nA: number = 0, nb: number, nB: number = 0,): number => {
+  if (!na) {
+    return (Math.sin(nA) * nb) / Math.sin(nB);
+  }
+  return Math.asin((na * Math.sin(nB)) / nb);
+}
+const cosineLawAngle = (na: number, nb: number, nc: number): number => {
+  return Math.acos((nb * nb + nc * nc - na * na) / (2 * nb * nc));
+}
+const cosineLawSide = (na: number, nb: number, nC: number): number => {
+  return Math.sqrt(na * na + nb * nb - 2 * na * nb * Math.cos(nC));
+}
+
 // create Triangle class
 export class Triangle {
   // triangle values
@@ -336,8 +350,8 @@ export class Triangle {
 
   // function to calculate triangle when given 3 sides
   calculateWithThreeSides(): void {
-    this.A = this.cosineLawAngle(this.a, this.b, this.c);
-    this.B = this.sineLaw(this.b, 0, this.a, this.A);
+    this.A = cosineLawAngle(this.a, this.b, this.c);
+    this.B = sineLaw(this.b, 0, this.a, this.A);
     this.C = Math.PI - this.A - this.B;
   }
   // Break Case = 3,4,5
@@ -355,16 +369,16 @@ export class Triangle {
 
     // Calculate the missing sides
     if (this.a) {
-      this.b = this.sineLaw(0, this.B, this.a, this.A);
-      this.c = this.sineLaw(0, this.C, this.a, this.A);
+      this.b = sineLaw(0, this.B, this.a, this.A);
+      this.c = sineLaw(0, this.C, this.a, this.A);
     }
     if (this.b) {
-      this.a = this.sineLaw(0, this.A, this.b, this.B);
-      this.c = this.sineLaw(0, this.C, this.b, this.B);
+      this.a = sineLaw(0, this.A, this.b, this.B);
+      this.c = sineLaw(0, this.C, this.b, this.B);
     }
     if (this.c) {
-      this.a = this.sineLaw(0, this.A, this.c, this.C);
-      this.b = this.sineLaw(0, this.B, this.c, this.C);
+      this.a = sineLaw(0, this.A, this.c, this.C);
+      this.b = sineLaw(0, this.B, this.c, this.C);
     }
   }
 
@@ -373,31 +387,31 @@ export class Triangle {
     // angle is between the two sides
     if (this.a && this.b && this.C) {
       // calculate missing side
-      this.c = this.cosineLawSide(this.a, this.b, this.C);
+      this.c = cosineLawSide(this.a, this.b, this.C);
       // calculate missing angles
-      this.A = this.sineLaw(this.a, 0, this.c, this.C);
+      this.A = sineLaw(this.a, 0, this.c, this.C);
       this.B = Math.PI - this.A - this.C;
     } else if (this.a && this.c && this.B) {
       // calculate missing side
-      this.b = this.cosineLawSide(this.a, this.c, this.B);
+      this.b = cosineLawSide(this.a, this.c, this.B);
       // calculate missing angles
-      this.A = this.sineLaw(this.a, 0, this.b, this.B);
+      this.A = sineLaw(this.a, 0, this.b, this.B);
       this.C = Math.PI - this.A - this.B;
     } else if (this.b && this.c && this.A) {
       // calculate missing side
-      this.a = this.cosineLawSide(this.b, this.c, this.A);
+      this.a = cosineLawSide(this.b, this.c, this.A);
       // calculate missing angles
-      this.B = this.sineLaw(this.b, 0, this.a, this.A);
+      this.B = sineLaw(this.b, 0, this.a, this.A);
       this.C = Math.PI - this.A - this.B;
     }
 
     // angle is opposite the side
     else if (this.a && this.b && this.A) {
       // calculate missing angles
-      this.B = this.sineLaw(this.b, 0, this.a, this.A);
+      this.B = sineLaw(this.b, 0, this.a, this.A);
       this.C = Math.PI - this.A - this.B;
       // calculate missing side
-      this.c = this.sineLaw(0, this.C, this.a, this.A);
+      this.c = sineLaw(0, this.C, this.a, this.A);
 
       // if Triangle is ambiguous, switch the angle
       if (this.ambiguous) {
@@ -405,14 +419,14 @@ export class Triangle {
         this.B2 = Math.PI - this.B;
         this.C2 = Math.PI - this.A - this.B2;
         // calculate missing side
-        this.c2 = this.sineLaw(0, this.C2, this.b2, this.B2);
+        this.c2 = sineLaw(0, this.C2, this.b2, this.B2);
       }
     } else if (this.a && this.c && this.C) {
       // calculate missing angles
-      this.A = this.sineLaw(this.a, 0, this.c, this.C);
+      this.A = sineLaw(this.a, 0, this.c, this.C);
       this.B = Math.PI - this.A - this.C;
       // calculate missing side
-      this.b = this.sineLaw(0, this.B, this.c, this.C);
+      this.b = sineLaw(0, this.B, this.c, this.C);
 
       // if Triangle is ambiguous, switch the angle
       if (this.ambiguous) {
@@ -420,14 +434,14 @@ export class Triangle {
         this.A2 = Math.PI - this.A;
         this.B2 = Math.PI - this.A2 - this.C;
         // calculate missing side
-        this.b2 = this.sineLaw(0, this.B2, this.a2, this.A2);
+        this.b2 = sineLaw(0, this.B2, this.a2, this.A2);
       }
     } else if (this.b && this.c && this.B) {
       // calculate missing angles
-      this.C = this.sineLaw(this.c, 0, this.b, this.B);
+      this.C = sineLaw(this.c, 0, this.b, this.B);
       this.A = Math.PI - this.B - this.C;
       // calculate missing side
-      this.a = this.sineLaw(0, this.A, this.b, this.B);
+      this.a = sineLaw(0, this.A, this.b, this.B);
 
       // if Triangle is ambiguous, switch the angle
       if (this.ambiguous) {
@@ -435,14 +449,14 @@ export class Triangle {
         this.C2 = Math.PI - this.C;
         this.A2 = Math.PI - this.B - this.C2;
         // calculate missing side
-        this.a2 = this.sineLaw(0, this.A2, this.c2, this.C2);
+        this.a2 = sineLaw(0, this.A2, this.c2, this.C2);
       }
     } else if (this.c && this.b && this.C) {
       // calculate missing angles
-      this.B = this.sineLaw(this.b, 0, this.c, this.C);
+      this.B = sineLaw(this.b, 0, this.c, this.C);
       this.A = Math.PI - this.B - this.C;
       // calculate missing side
-      this.a = this.sineLaw(0, this.A, this.c, this.C);
+      this.a = sineLaw(0, this.A, this.c, this.C);
 
       // if Triangle is ambiguous, switch the angle
       if (this.ambiguous) {
@@ -450,14 +464,14 @@ export class Triangle {
         this.B2 = Math.PI - this.B;
         this.A2 = Math.PI - this.B2 - this.C;
         // calculate missing side
-        this.a2 = this.sineLaw(0, this.A2, this.b2, this.B2);
+        this.a2 = sineLaw(0, this.A2, this.b2, this.B2);
       }
     } else if (this.b && this.a && this.B) {
       // calculate missing angles
-      this.A = this.sineLaw(this.a, 0, this.b, this.B);
+      this.A = sineLaw(this.a, 0, this.b, this.B);
       this.C = Math.PI - this.A - this.B;
       // calculate missing side
-      this.c = this.sineLaw(0, this.C, this.a, this.A);
+      this.c = sineLaw(0, this.C, this.a, this.A);
 
       // if Triangle is ambiguous, switch the angle
       if (this.ambiguous) {
@@ -465,14 +479,14 @@ export class Triangle {
         this.A2 = Math.PI - this.A;
         this.C2 = Math.PI - this.A2 - this.B;
         // calculate missing side
-        this.c2 = this.sineLaw(0, this.C2, this.a2, this.A2);
+        this.c2 = sineLaw(0, this.C2, this.a2, this.A2);
       }
     } else if (this.c && this.a && this.A) {
       // calculate missing angles
-      this.C = this.sineLaw(this.c, 0, this.a, this.A);
+      this.C = sineLaw(this.c, 0, this.a, this.A);
       this.B = Math.PI - this.A - this.C;
       // calculate missing side
-      this.b = this.sineLaw(0, this.B, this.a, this.A);
+      this.b = sineLaw(0, this.B, this.a, this.A);
 
       // if Triangle is ambiguous, switch the angle
       if (this.ambiguous) {
@@ -480,23 +494,9 @@ export class Triangle {
         this.C2 = Math.PI - this.C;
         this.B2 = Math.PI - this.A - this.C2;
         // calculate missing side
-        this.b2 = this.sineLaw(0, this.B2, this.c2, this.C2);
+        this.b2 = sineLaw(0, this.B2, this.c2, this.C2);
       }
     }
-  }
-
-  // Create Sine and Cosine Law Functions
-  sineLaw(na: number = 0, nA: number = 0, nb: number, nB: number = 0): number {
-    if (!na) {
-      return (Math.sin(nA) * nb) / Math.sin(nB);
-    }
-    return Math.asin((na * Math.sin(nB)) / nb);
-  }
-  cosineLawAngle(na: number, nb: number, nc: number): number {
-    return Math.acos((nb * nb + nc * nc - na * na) / (2 * nb * nc));
-  }
-  cosineLawSide(na: number, nb: number, nC: number): number {
-    return Math.sqrt(na * na + nb * nb - 2 * na * nb * Math.cos(nC));
   }
 
   // Cycle to the other case
