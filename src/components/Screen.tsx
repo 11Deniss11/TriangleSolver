@@ -298,9 +298,6 @@ const Screen = ({
             <input
               name="a"
               value={inputValues.a}
-              size={
-                inputValues.a.length > 4 ? String(inputValues.a).length - 4 : 1
-              }
               onChange={handleInputChange}
               style={{
                 position: "absolute",
@@ -310,12 +307,16 @@ const Screen = ({
                 top: `${
                   (shiftedCoordinates[0].y + shiftedCoordinates[2].y) / 2 - 15
                 }px`,
+                width: `${
+                  inputValues.a.length > 5
+                    ? (String(inputValues.a).length - 5) * 9 + 50
+                    : 50
+                }px`,
               }}
             />
             <input
               name="b"
               value={inputValues.b}
-              size={inputValues.b.length > 4 ? inputValues.b.length - 4 : 1}
               onChange={handleInputChange}
               style={{
                 position: "absolute",
@@ -325,12 +326,16 @@ const Screen = ({
                 top: `${
                   (shiftedCoordinates[0].y + shiftedCoordinates[1].y) / 2 - 15
                 }px`,
+                width: `${
+                  inputValues.b.length > 5
+                    ? (String(inputValues.b).length - 5) * 9 + 50
+                    : 50
+                }px`,
               }}
             />
             <input
               name="c"
               value={inputValues.c}
-              size={inputValues.c.length > 4 ? inputValues.c.length - 4 : 1}
               onChange={handleInputChange}
               style={{
                 position: "absolute",
@@ -340,39 +345,56 @@ const Screen = ({
                 top: `${
                   (shiftedCoordinates[1].y + shiftedCoordinates[2].y) / 2 - 15
                 }px`,
+                width: `${
+                  inputValues.c.length > 5
+                    ? (String(inputValues.c).length - 5) * 9 + 50
+                    : 50
+                }px`,
               }}
             />
             <input
               name="A"
               value={inputValues.A}
-              size={inputValues.A.length > 4 ? inputValues.A.length - 4 : 1}
               onChange={handleInputChange}
               style={{
                 position: "absolute",
                 left: `${shiftedCoordinates[1].x - 25}px`,
                 top: `${shiftedCoordinates[1].y - 34}px`,
+                width: `${
+                  inputValues.A.length > 5
+                    ? (String(inputValues.A).length - 5) * 9 + 50
+                    : 50
+                }px`,
               }}
             />
             <input
               name="B"
               value={inputValues.B}
-              size={inputValues.B.length > 4 ? inputValues.B.length - 4 : 1}
               onChange={handleInputChange}
               style={{
                 position: "absolute",
                 left: `${shiftedCoordinates[2].x}px`,
                 top: `${shiftedCoordinates[2].y - 5}px`,
+                width: `${
+                  inputValues.B.length > 5
+                    ? (String(inputValues.B).length - 5) * 9 + 50
+                    : 50
+                }px`,
               }}
             />
             <input
               name="C"
               value={inputValues.C}
-              size={inputValues.C.length > 4 ? inputValues.C.length - 4 : 1}
               onChange={handleInputChange}
               style={{
                 position: "absolute",
                 right: `${size - shiftedCoordinates[0].x}px`,
                 top: `${shiftedCoordinates[0].y - 5}px`,
+                width: `${
+                  inputValues.C.length > 5
+                    ? (String(inputValues.C).length - 5) * 9 + 50
+                    : 50
+                }px`,
               }}
             />
           </>

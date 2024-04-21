@@ -85,7 +85,7 @@ function SmallButton({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {children}
+        <div style={{ userSelect: "none" }}>{children}</div>
         <button
           onClick={active ? onClick : () => {}} // if button is not active, do nothing
           style={{
