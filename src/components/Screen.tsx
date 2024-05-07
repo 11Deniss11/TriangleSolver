@@ -250,7 +250,7 @@ const Screen = ({
           onClick={handleRender}
           active={activeRenderButton}
         >
-          Render Triangle
+          Calculate Triangle
         </SmallButton>
         {/* Reset Button */}
         <SmallButton
@@ -261,7 +261,7 @@ const Screen = ({
           onClick={handleReset}
           active={activeResetButton}
         >
-          Reset Triangle
+          Clear Triangle
         </SmallButton>
         {/* Cycle Ambigious solution button, with additional logic for small window sizes */}
         <SmallButton
